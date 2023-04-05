@@ -13,7 +13,7 @@ npm i rollup-plugin-browser-sync -D
 **`rollup.config.js`**
 
 ```js
-import browserSync from 'rollup-plugin-browser-sync';
+import browserSync from 'rollup-plugin-browser-sync-extension';
 
 export default {
   ...
