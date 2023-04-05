@@ -1,0 +1,53 @@
+{
+  "name": "rollup-plugin-browser-sync",
+  "version": "1.0.0",
+  "description": "Live Reload Feature for Rollup Plugin",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js",
+    "default": "./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ouweiya/rollup-plugin-browser-sync"
+  },
+  "scripts": {
+    "watch": "rimraf dist && tsc --watch",
+    "tsc": "rimraf dist && tsc"
+  },
+  "keywords": [
+    "rollup",
+    "plugin",
+    "browser-sync",
+    "live reload"
+  ],
+  "files": [
+    "!.github",
+    "!deprecated",
+    "dist",
+    "tsconfig.json",
+    "src"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@rollup/pluginutils": "^5.0.2",
+    "@tsconfig/node18-strictest-esm": "^1.0.1",
+    "@types/node": "^18.15.11",
+    "rimraf": "^4.4.1",
+    "rollup": "^3.20.2",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "@types/browser-sync": "^2.27.0",
+    "@types/ws": "^8.5.4",
+    "browser-sync": "^2.29.1",
+    "ws": "^8.13.0"
+  }
+}

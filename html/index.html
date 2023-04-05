@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>Lorem ipsum dolor sit amet.</p>
+    <script>
+      // 创建 web socket 连接
+      const ws = new WebSocket('ws://localhost:5000');
+      // 连接成功
+      ws.addEventListener('open', function (event) {
+        ws.send('客户端连接成功');
+        console.log('OPEN');
+      });
+      // 接收服务端消息
+      ws.addEventListener('message', function (event) {
+        console.log(`Received: ${event.data}`);
+      });
+
+      ws.addEventListener('error', error => {
+        console.error(`WebSocket error: ${error}`);
+      });
+    </script>
+  </body>
+</html>
