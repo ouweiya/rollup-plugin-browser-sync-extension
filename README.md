@@ -1,3 +1,7 @@
+## Live Reload Feature for Rollup Plugin
+
+Supports web page reloading and Chrome extension reloading.
+
 ## Install
 
 ```console
