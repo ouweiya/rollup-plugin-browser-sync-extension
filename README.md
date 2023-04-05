@@ -1,4 +1,4 @@
-## Live Reload Feature for Rollup Plugin
+## Live Reload for Rollup Plugin
 
 Supports web page reloading and Chrome extension reloading.
 
@@ -34,6 +34,8 @@ export default {
 
 **Browsersync options**
 
+`single: true` is very helpful for PWA single-page routing.
+
 https://browsersync.io/docs/options
 
 ## Chrome Extension Reload
@@ -53,13 +55,12 @@ browserSync({
 }),
 ```
 
-When `extReload` is set to `false`, use `browserSync` for webpage reloading with the configuration items as `options`.
-When `extReload` is set to `true`, use `ws` for extension reloading with the configuration items as `extReloadOptions`.
+- When `extReload` is set to `false`, use `browserSync` for webpage reloading with the configuration items as `options`.
+- When `extReload` is set to `true`, use `ws` for extension reloading with the configuration items as `extReloadOptions`.
 
 **WebSocketServer Options**
 
 https://github.com/websockets/ws/blob/master/doc/ws.md#new-websocketserveroptions-callback
-
 
 ## Chrome Extension Code
 
