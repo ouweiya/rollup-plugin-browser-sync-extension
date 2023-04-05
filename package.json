@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-browser-sync-extension",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Live Reload Feature for Rollup Plugin",
   "type": "module",
   "main": "./dist/index.js",

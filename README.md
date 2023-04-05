@@ -5,7 +5,7 @@ Supports web page reloading and Chrome extension reloading.
 ## Install
 
 ```console
-npm i rollup-plugin-browser-sync -D
+npm i rollup-plugin-browser-sync-extension -D
 ```
 
 ## Usage
