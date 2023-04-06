@@ -69,11 +69,11 @@ https://github.com/websockets/ws/blob/master/doc/ws.md#new-websocketserveroption
 ```js
 const ws = new WebSocket('ws://localhost:5000');
 // Connection succeeded
-ws.addEventListener('open', function (event) {
+ws.addEventListener('open', event => {
   console.log('OPEN');
 });
 // Receive server messages
-ws.addEventListener('message', function (event) {
+ws.addEventListener('message', event => {
   console.log(`Message: ${event.data}`);
   chrome.runtime.reload();
 });
@@ -88,6 +88,6 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-`Service Worker` will be terminated after a period of inactivity. It is necessary to click on the `Service Worker` script to pop it up, which helps keep it persistently active.
+`Service Worker` will be terminated after a period of inactivity. By opening the `Service Worker` view, it helps keep it persistently active.
 
 https://developer.chrome.com/docs/extensions/mv3/service_workers/
