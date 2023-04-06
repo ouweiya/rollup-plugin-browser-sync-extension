@@ -90,6 +90,7 @@ chrome.runtime.onInstalled.addListener(() => {
 ```
 
 `Service Workers` get terminated after being idle for a while.
+
 Open the `Service Worker` view to keep it active.
 
 https://developer.chrome.com/docs/extensions/mv3/service_workers/
