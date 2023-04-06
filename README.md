@@ -87,3 +87,7 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 ```
+
+`Service Worker` will be terminated after a period of inactivity. It is necessary to click on the `Service Worker` script to pop it up, which helps keep it persistently active.
+
+https://developer.chrome.com/docs/extensions/mv3/service_workers/
