@@ -75,6 +75,7 @@ ws.addEventListener('open', event => {
 // Receive server messages
 ws.addEventListener('message', event => {
   console.log(`Message: ${event.data}`);
+  // Reload background
   chrome.runtime.reload();
 });
 ws.addEventListener('error', error => {
