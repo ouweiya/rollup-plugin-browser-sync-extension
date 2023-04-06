@@ -18,11 +18,8 @@ const browserSyncPlugin = ({ options, extReload, extReloadOptions }: OptionsType
   if (extReload) {
     wss = new WebSocketServer(extReloadOptions);
     wss.on('connection', ws => {
-      console.log('连接服务器');
       ws.on('error', console.error);
-      ws.on('message', data => {
-        console.log('来自客户端的消息：', data.toString());
-      });
+      console.log('Connection OK');
     });
   } else {
     bs = browserSync.create();
@@ -34,8 +31,8 @@ const browserSyncPlugin = ({ options, extReload, extReloadOptions }: OptionsType
       if (extReload) {
         wss.clients.forEach(client => {
           if (client.readyState === WebSocket.OPEN) {
-            client.send('来自服务器信息');
-            console.log('发送信息');
+            client.send('reloading');
+            console.log('Extension Reloading...');
           }
         });
       } else {
@@ -50,3 +47,7 @@ const browserSyncPlugin = ({ options, extReload, extReloadOptions }: OptionsType
 };
 
 export default browserSyncPlugin;
+
+// ws.on('message', data => {
+//   console.log('Message from client:', data.toString());
+// });

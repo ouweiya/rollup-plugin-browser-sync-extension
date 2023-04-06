@@ -70,12 +70,11 @@ https://github.com/websockets/ws/blob/master/doc/ws.md#new-websocketserveroption
 const ws = new WebSocket('ws://localhost:5000');
 // Connection succeeded
 ws.addEventListener('open', function (event) {
-  ws.send('client connects successfully');
   console.log('OPEN');
 });
 // Receive server messages
 ws.addEventListener('message', function (event) {
-  console.log(`Received: ${event.data}`);
+  console.log(`Message: ${event.data}`);
   chrome.runtime.reload();
 });
 ws.addEventListener('error', error => {
@@ -83,7 +82,7 @@ ws.addEventListener('error', error => {
 });
 // Reload tab
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.tabs.query({ active: true, url: 'http://127.0.0.1/*' }, tabs => {
+  chrome.tabs.query({ active: true, currentWindow: true, url: 'http://127.0.0.1/*' }, tabs => {
     tabs.forEach(tab => chrome.tabs.reload(tab.id));
   });
 });
