@@ -55,8 +55,8 @@ browserSync({
 }),
 ```
 
-- When `extReload` is set to `false`, use `browserSync` for webpage reloading with the configuration items as `options`.
-- When `extReload` is set to `true`, use `ws` for extension reloading with the configuration items as `extReloadOptions`.
+- When `extReload` is set to `false`, use [`browserSync`](https://github.com/Browsersync/browser-sync) for webpage reloading with the configuration items as `options`.
+- When `extReload` is set to `true`, use [`ws`](https://github.com/websockets/ws) for extension reloading with the configuration items as `extReloadOptions`.
 
 **WebSocketServer Options**
 
