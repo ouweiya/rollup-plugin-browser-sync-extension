@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ouweiya/rollup-plugin-browser-sync"
+    "url": "https://github.com/ouweiya/rollup-plugin-browser-sync-extension"
   },
   "scripts": {
     "watch": "rimraf dist && tsc --watch",
