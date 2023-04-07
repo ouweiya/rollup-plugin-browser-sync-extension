@@ -95,7 +95,8 @@ chrome.runtime.onInstalled.addListener(() => {
 output: {
   ...
   banner: chunk => {
-    // In development environment, inject reload script into specified files; "watch" can be any custom name.
+    // In development environment, inject reload script into specified files.
+    // "watch" can be any custom name.
     if (process.env.NODE_ENV === 'watch' && chunk.fileName === 'service_worker.js') {
       const conent = fs.readFileSync('src/extReload.ts', 'utf-8');
       console.log('inject ok');
