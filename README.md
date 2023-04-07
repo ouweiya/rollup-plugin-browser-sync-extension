@@ -89,7 +89,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 ```
 
-### Code injection limited to development environment.
+#### Code injection limited to development environment.
 
 ```js
 output: {
@@ -106,7 +106,7 @@ output: {
 },
 ```
 
-### Add environment variables
+#### Add environment variables
 
 ```json
 "scripts": {
