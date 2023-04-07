@@ -64,7 +64,7 @@ https://github.com/websockets/ws/blob/master/doc/ws.md#new-websocketserveroption
 
 ## Chrome Extension Code
 
-`service_worker.js`
+`extReload.js`
 
 ```js
 const ws = new WebSocket('ws://localhost:5000');
@@ -87,6 +87,31 @@ chrome.runtime.onInstalled.addListener(() => {
     tabs.forEach(tab => chrome.tabs.reload(tab.id));
   });
 });
+```
+
+### Code injection limited to development environment.
+
+```js
+output: {
+  ...
+  banner: chunk => {
+    // In development environment, inject reload script into specified files; "watch" can be any custom name.
+    if (process.env.NODE_ENV === 'watch' && chunk.fileName === 'service_worker.js') {
+      const conent = fs.readFileSync('src/extReload.ts', 'utf-8');
+      console.log('inject ok');
+      return conent;
+    }
+    return '';
+  },
+},
+```
+
+### Add environment variables
+
+```json
+"scripts": {
+  "watch": "rollup -c -w --environment NODE_ENV:watch",
+},
 ```
 
 `Service Workers` get terminated after being idle for a while.

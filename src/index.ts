@@ -1,4 +1,4 @@
-import type { Plugin } from 'rollup';
+import type { Plugin, AddonHookFunction } from 'rollup';
 import browserSync, { BrowserSyncInstance } from 'browser-sync';
 import type { Options } from 'browser-sync';
 import WebSocket, { WebSocketServer } from 'ws';
