@@ -1,4 +1,4 @@
-import type { Plugin, AddonHookFunction } from 'rollup';
+import type { Plugin } from 'rollup';
 import browserSync, { BrowserSyncInstance } from 'browser-sync';
 import type { Options } from 'browser-sync';
 import WebSocket, { WebSocketServer } from 'ws';
@@ -11,30 +11,45 @@ type OptionsType = {
   };
 };
 
+let bs: BrowserSyncInstance;
+let wss: WebSocketServer;
+
 const browserSyncPlugin = ({ options, extReload, extReloadOptions }: OptionsType): Plugin => {
-  let bs: BrowserSyncInstance;
-  let wss: WebSocketServer;
-
-  if (extReload) {
-    wss = new WebSocketServer(extReloadOptions);
-    wss.on('connection', ws => {
-      ws.on('error', console.error);
-      console.log('Connection OK');
-    });
-  } else {
-    bs = browserSync.create();
-  }
-
+  // console.log('browserSyncPlugin------------------');
   return {
-    name: 'rollup-plugin-browser-sync',
+    name: 'rollup-plugin-browser-sync-extension',
+    buildStart() {
+      if (extReload) {
+        if (!wss) {
+          wss = new WebSocketServer(extReloadOptions);
+          wss.on('connection', ws => {
+            ws.on('error', console.error);
+            console.log('Connection OK');
+          });
+          wss.on('error', err => {
+            console.log(err);
+            this.error(err);
+          });
+
+          // console.log('启动ws服务器');
+        }
+      } else {
+        if (!bs) {
+          bs = browserSync.create();
+          // console.log('启动browser-sync服务器');
+        }
+      }
+    },
     writeBundle() {
+      // console.log('执行钩子', 'writeBundle');
       if (extReload) {
         wss.clients.forEach(client => {
           if (client.readyState === WebSocket.OPEN) {
-            client.send('reloading');
+            client.send('Reloading');
             console.log('Extension Reloading...');
           }
         });
+        // console.log('wss.clients, 发送消息');
       } else {
         if (bs.active) {
           bs.reload();
@@ -47,7 +62,3 @@ const browserSyncPlugin = ({ options, extReload, extReloadOptions }: OptionsType
 };
 
 export default browserSyncPlugin;
-
-// ws.on('message', data => {
-//   console.log('Message from client:', data.toString());
-// });

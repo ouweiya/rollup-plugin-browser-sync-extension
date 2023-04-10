@@ -4,6 +4,10 @@ try {
   const wss = new WebSocketServer({ port: 5000 }, () => {
     console.log('WebSocket Server is listening on port 5000');
   });
+
+  wss.on('error', error => {
+    console.log(error);
+  });
 } catch (error) {
   console.log('error222', error);
 }
