@@ -1,11 +1,17 @@
 import type { Plugin } from 'rollup';
 import type { Options } from 'browser-sync';
-type OptionsType = {
+interface OptionsType {
     options: Options;
-    extReload?: boolean;
-    extReloadOptions?: {
+    extReload?: false;
+    extReloadOptions?: never;
+}
+interface OptionsTypeWithReload {
+    options: Options;
+    extReload: true;
+    extReloadOptions: {
         port: number;
     };
-};
-declare const browserSyncPlugin: ({ options, extReload, extReloadOptions }: OptionsType) => Plugin;
+}
+type OptionsTypeFinal = OptionsType | OptionsTypeWithReload;
+declare const browserSyncPlugin: ({ options, extReload, extReloadOptions }: OptionsTypeFinal) => Plugin;
 export default browserSyncPlugin;

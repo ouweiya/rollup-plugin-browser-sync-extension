@@ -14,9 +14,9 @@ const browserSyncPlugin = ({ options, extReload, extReloadOptions }) => {
                         console.log('Connection OK');
                     });
                     wss.on('error', err => {
-                        console.log(err);
-                        this.error(err);
+                        this.warn(err);
                     });
+                    console.log(`Listen extension reload port ${extReloadOptions.port}`);
                 }
             }
             else {
