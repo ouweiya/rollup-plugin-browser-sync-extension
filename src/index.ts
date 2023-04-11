@@ -30,14 +30,13 @@ const browserSyncPlugin = ({ options, extReload, extReloadOptions }: OptionsType
         if (!wss) {
           wss = new WebSocketServer(extReloadOptions);
           wss.on('connection', ws => {
-            ws.on('error', console.error);
-            console.log('Connection OK');
+            ws.on('error', this.warn);
+            console.log('\x1b[1m\x1b[32m%s\x1b[0m', 'Connection Successful');
           });
           wss.on('error', err => {
             this.warn(err);
           });
-
-          console.log(`Listen extension reload port ${extReloadOptions.port}`);
+          console.log('\x1b[1m\x1b[32m%s\x1b[0m', `Listen extension reload port ${extReloadOptions.port}`);
         }
       } else {
         if (!bs) {
@@ -49,8 +48,7 @@ const browserSyncPlugin = ({ options, extReload, extReloadOptions }: OptionsType
       if (extReload) {
         wss.clients.forEach(client => {
           if (client.readyState === WebSocket.OPEN) {
-            client.send('Reloading');
-            console.log('Extension Reloading...');
+            client.send('Reloading', () => console.log('\x1b[1m\x1b[32m%s\x1b[0m', 'Extension Reloading...'));
           }
         });
       } else {
