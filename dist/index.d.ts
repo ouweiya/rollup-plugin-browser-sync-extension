@@ -1,12 +1,16 @@
 import type { Plugin } from 'rollup';
 import type { Options } from 'browser-sync';
 interface OptionsType {
-    options: Options;
+    options: Options & {
+        snippet?: boolean;
+    };
     extReload?: false;
     extReloadOptions?: never;
 }
 interface OptionsTypeWithReload {
-    options: Options;
+    options: Options & {
+        snippet?: boolean;
+    };
     extReload: true;
     extReloadOptions: {
         port: number;

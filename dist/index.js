@@ -1,8 +1,8 @@
 import browserSync from 'browser-sync';
 import WebSocket, { WebSocketServer } from 'ws';
-let bs;
-let wss;
 const browserSyncPlugin = ({ options, extReload, extReloadOptions }) => {
+    let bs;
+    let wss;
     return {
         name: 'rollup-plugin-browser-sync-extension',
         buildStart() {
@@ -23,6 +23,9 @@ const browserSyncPlugin = ({ options, extReload, extReloadOptions }) => {
                 if (!bs) {
                     bs = browserSync.create();
                 }
+                if (!bs.active) {
+                    bs.init(options);
+                }
             }
         },
         writeBundle() {
@@ -34,11 +37,8 @@ const browserSyncPlugin = ({ options, extReload, extReloadOptions }) => {
                 });
             }
             else {
-                if (bs.active) {
+                if (bs && bs.active) {
                     bs.reload();
-                }
-                else {
-                    bs.init(options);
                 }
             }
         },
