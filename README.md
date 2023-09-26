@@ -34,9 +34,23 @@ export default {
 
 **Browsersync options**
 
-`single: true` is very helpful for PWA single-page routing.
+`single: true` is very suitable for single-page applications, resolving the error of not finding the page on refresh.
 
-https://browsersync.io/docs/options
+Browsersync sometimes interrupts reloading due to script injection failures.
+It's recommended to manually add the script in the HTML file for more reliability.
+
+```js
+browserSync({
+    options: {
+        ...
+        snippet: false,
+    },
+}),
+
+<script async src="/browser-sync/browser-sync-client.js?v=2.29.3"></script>
+```
+
+Learn more about Browsersync configuration. https://browsersync.io/docs/options
 
 ## Chrome Extension Reload
 
@@ -55,8 +69,8 @@ browserSync({
 }),
 ```
 
-- When `extReload` is set to `false`, use [`browserSync`](https://github.com/Browsersync/browser-sync) for webpage reloading with the configuration items as `options`.
-- When `extReload` is set to `true`, use [`ws`](https://github.com/websockets/ws) for extension reloading with the configuration items as `extReloadOptions`.
+-   When `extReload` is set to `false`, use [`browserSync`](https://github.com/Browsersync/browser-sync) for webpage reloading with the configuration items as `options`.
+-   When `extReload` is set to `true`, use [`ws`](https://github.com/websockets/ws) for extension reloading with the configuration items as `extReloadOptions`.
 
 **WebSocketServer Options**
 
@@ -70,22 +84,22 @@ https://github.com/websockets/ws/blob/master/doc/ws.md#new-websocketserveroption
 const ws = new WebSocket('ws://localhost:5000');
 // Connection succeeded
 ws.addEventListener('open', event => {
-  console.log('OPEN');
+    console.log('OPEN');
 });
 // Receive server messages
 ws.addEventListener('message', event => {
-  console.log(`Message: ${event.data}`);
-  // Reload background
-  chrome.runtime.reload();
+    console.log(`Message: ${event.data}`);
+    // Reload background
+    chrome.runtime.reload();
 });
 ws.addEventListener('error', error => {
-  console.error(`WebSocket error: ${error}`);
+    console.error(`WebSocket error: ${error}`);
 });
 // Reload tab
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.tabs.query({ active: true, currentWindow: true, url: 'http://127.0.0.1/*' }, tabs => {
-    tabs.forEach(tab => chrome.tabs.reload(tab.id));
-  });
+    chrome.tabs.query({ active: true, currentWindow: true, url: 'http://127.0.0.1/*' }, tabs => {
+        tabs.forEach(tab => chrome.tabs.reload(tab.id));
+    });
 });
 ```
 
